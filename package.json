@@ -1,0 +1,20 @@
+{
+  "name": "lockflag",
+  "version": "1.0.0",
+  "description": "javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex",
+  "main": "json.nested.function.invoke.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ganesh k bhat",
+  "license": "MIT",
+  "devDependencies": {
+    "chia": "^0.0.1",
+    "mocha": "^10.7.3",
+    "sinon": "^19.0.2"
+  }
+}
