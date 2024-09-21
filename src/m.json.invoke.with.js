@@ -17,34 +17,6 @@
 'use strict';
 
 
-
-function createMutex() {
-    let queue = [];
-    let locked = false;
-
-    function acquire() {
-        const unlock = () => {
-            if (queue.length > 0) {
-                const next = queue.shift();
-                next(unlock);
-            } else {
-                locked = false;
-            }
-        };
-
-        return new Promise((resolve) => {
-            if (locked) {
-                queue.push(resolve);
-            } else {
-                locked = true;
-                resolve(unlock);
-            }
-        });
-    }
-
-    return { acquire };
-}
-
 function createObjectManager() {
     let obj = {}; // Private object to store key-value pairs
     const mutex = createMutex();
@@ -55,7 +27,7 @@ function createObjectManager() {
     }
 
     // Helper function to set the value of a nested key
-    function setNestedValue(keyPath, newValue) {
+    function setNestedValue(keyPath, newValue, valueTransformer) {
         const keys = keyPath.split('.');
         let current = obj;
 
@@ -67,8 +39,13 @@ function createObjectManager() {
             current = current[keys[i]];
         }
 
-        // Set the value on the last key
+        // Set the new value for the last key
         current[keys[keys.length - 1]] = newValue;
+
+        // Invoke the valueTransformer function with the new value
+        if (typeof valueTransformer === 'function') {
+            valueTransformer(newValue);
+        }
     }
 
     return {
@@ -76,10 +53,10 @@ function createObjectManager() {
             return getNestedValue(keyPath); // Return the value for the nested key
         },
 
-        async setValue(keyPath, newValue) {
+        async setValue(keyPath, newValue, valueTransformer) {
             const release = await mutex.acquire();
             try {
-                setNestedValue(keyPath, newValue); // Set the value for the nested key
+                setNestedValue(keyPath, newValue, valueTransformer); // Set the new value and invoke the transformer
             } finally {
                 release();  // Release the lock after setting the value
             }
@@ -91,30 +68,35 @@ function createObjectManager() {
     };
 }
 
+module.exports = createObjectManager;
+
 // Usage
 (async () => {
     const manager = createObjectManager();
 
     console.log(await manager.getValue('key1')); // undefined
 
-    await manager.setValue('key1', 42); // Single level
-    await manager.setValue('key2.subkey1', 'hello'); // Nested level
-    await manager.setValue('key2.subkey2.subkey3', 'world'); // More deeply nested
-    await manager.setValue('key3.key1', 42); // Single level
-    await manager.setValue('key4', {"key1": 42}); // Single level
+    // Setting a value and then invoking a transformer
+    await manager.setValue('key1', 42, (newValue) => {
+        console.log('Value set for key1:', newValue); // Output: Value set for key1: 42
+    });
 
     console.log(await manager.getValue('key1')); // 42
-    console.log(await manager.getValue('key2.subkey1')); // hello
-    console.log(await manager.getValue('key2.subkey2.subkey3')); // world
 
+    // Setting a nested value and then invoking a transformer
+    await manager.setValue('key2.subkey1', 'hello', (newValue) => {
+        console.log('Value set for key2.subkey1:', newValue); // Output: Value set for key2.subkey1: hello
+    });
+
+    console.log(await manager.getValue('key2.subkey1')); // hello
+
+    // Check the entire object
     console.log(await manager.getAllValues());
     // Output:
     // {
     //   key1: 42,
     //   key2: {
-    //     subkey1: 'hello',
-    //     subkey2: { subkey3: 'world' }
+    //     subkey1: 'hello'
     //   }
     // }
 })();
-

@@ -16,7 +16,11 @@
 
 'use strict';
 
-
-
-
-
+module.exports = {
+    "json": {
+        "invokeWith": require("./m.json.invoke.with.js"),
+        "nested": require("./m.json.js").createObjectManagerNested,
+        "nonNested": require("./m.json.js").createObjectManagerJson,
+    },
+    "value": require("./m.value.js")
+}

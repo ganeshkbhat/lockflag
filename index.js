@@ -16,3 +16,13 @@
 
 'use strict';
 
+const mutex = require("./index.js");
+
+module.exports = {
+    "json": {
+        "invokeWith": mutex.json.invokeWith,
+        "nested": mutex.json.nested,
+        "nonNested": mutex.json.nonNested,
+    },
+    "value": mutex.value
+}
