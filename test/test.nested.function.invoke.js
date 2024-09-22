@@ -21,7 +21,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 // Import the object manager function
-const { createObjectManager } = require('../index'); // Adjust the path to the file
+const createObjectManager  = require('../index'); // Adjust the path to the file
 
 describe('createObjectManager', function () {
     let manager;
