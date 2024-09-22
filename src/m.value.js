@@ -16,8 +16,7 @@
 
 'use strict';
 
-
-function createValueManager() {
+function valueBased() {
     let value = null;
     const mutex = new Mutex();
 
@@ -37,11 +36,11 @@ function createValueManager() {
     };
 }
 
-module.exports = createObjectManager;
+module.exports = valueBased;
 
 // Usage
 (async () => {
-    const manager = createValueManager();
+    const manager = valueBased();
 
     console.log(await manager.getValue()); // null
 

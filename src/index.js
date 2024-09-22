@@ -18,9 +18,9 @@
 
 module.exports = {
     "json": {
-        "invokeWith": require("./m.json.invoke.with.js"),
-        "nested": require("./m.json.js").createObjectManagerNested,
-        "nonNested": require("./m.json.js").createObjectManagerJson,
+        "invokeWith": require("./m.json.js").nestedInvokeWith,
+        "nested": require("./m.json.js").nested,
+        "nonNested": require("./m.json.js").nonNested,
     },
     "value": require("./m.value.js")
 }
