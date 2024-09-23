@@ -16,13 +16,17 @@
 
 'use strict';
 
-const mutex = require("./src/index.js");
 
-module.exports = {
-    "json": {
-        "invokeWith": mutex.json.invokeWith,
-        "nested": mutex.json.nested,
-        "nonNested": mutex.json.nonNested,
-    },
-    "value": mutex.value
-}
+const mutex = require("../index");
+
+// Usage
+(async () => {
+    const manager = mutex.value();
+
+    console.log(await manager.getValue()); // null
+
+    await manager.setValue(42);
+
+    console.log(await manager.getValue()); // 42
+})();
+

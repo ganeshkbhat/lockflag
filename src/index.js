@@ -16,11 +16,13 @@
 
 'use strict';
 
+const lk = require("./m.json.js")
+
 module.exports = {
     "json": {
-        "invokeWith": require("./m.json.js").nestedInvokeWith,
-        "nested": require("./m.json.js").nested,
-        "nonNested": require("./m.json.js").nonNested,
+        "invokeWith": lk.nestedInvokeWith,
+        "nested": lk.nested,
+        "nonNested": lk.nonNested,
     },
     "value": require("./m.value.js")
 }

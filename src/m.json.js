@@ -189,7 +189,7 @@ function nestedInvokeWith() {
     };
 }
 
-module.exports = nestedInvokeWith;
+module.exports.nestedInvokeWith = nestedInvokeWith;
 
 // Usage
 (async () => {

@@ -16,13 +16,7 @@
 
 'use strict';
 
-const mutex = require("./src/index.js");
 
-module.exports = {
-    "json": {
-        "invokeWith": mutex.json.invokeWith,
-        "nested": mutex.json.nested,
-        "nonNested": mutex.json.nonNested,
-    },
-    "value": mutex.value
-}
+const { expect } = require('chai');
+
+

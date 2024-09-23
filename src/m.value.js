@@ -16,9 +16,11 @@
 
 'use strict';
 
+const createMutex = require("./mutex.js");
+
 function valueBased() {
     let value = null;
-    const mutex = new Mutex();
+    const mutex = createMutex();
 
     return {
         async getValue() {
