@@ -19,8 +19,6 @@
 
 const mutex = require("../index");
 
-console.log("mutex:", mutex);
-
 // Usage
 (async () => {
     const manager = mutex.json.nonNested();
