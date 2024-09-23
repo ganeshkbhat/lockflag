@@ -21,14 +21,14 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 // Import the object manager function
-const createObjectManager  = require('./index'); // Adjust the path
+const createObjectManager  = require('../index'); // Adjust the path
 
 describe('createObjectManager', function () {
     let manager;
     let acquireStub, releaseStub;
 
     beforeEach(function () {
-        manager = createObjectManager();
+        manager = createObjectManager.json.nested();
 
         // Stub the mutex acquire method and mock release
         acquireStub = sinon.stub(manager, 'acquire');

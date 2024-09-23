@@ -28,7 +28,7 @@ describe('createObjectManager', function () {
     let valueTransformerSpy;
 
     beforeEach(function () {
-        manager = createObjectManager();
+        manager = createObjectManager.json.invokeWith();
         valueTransformerSpy = sinon.spy(); // Spy for valueTransformer function
     });
 
