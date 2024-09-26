@@ -4,7 +4,7 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 - value based mutex with acquire/release
 - json single value mutex acquire/release
 - json nested value mutex acquire/release
-
+- json nested value with function invoke mutex 
 
 ### value based mutex
 
