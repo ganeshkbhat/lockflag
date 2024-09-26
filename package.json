@@ -7,13 +7,22 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --reporter spec --recursive --timeout 60000"
   },
-  "keywords": [],
-  "author": "ganesh k bhat",
+  "author": "Ganesh Bhat <ganeshsurfs@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganeshkbhat/convertors.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ganeshkbhat/convertors/issues",
+    "email": "desktopcgi@gmail.com"
+  },
+  "homepage": "https://github.com/ganeshkbhat/convertors#readme",
+  "keywords": [],
   "devDependencies": {
-    "chia": "^0.0.1",
+    "chai": "^4.3.7",
     "mocha": "^10.7.3",
     "sinon": "^19.0.2"
   }

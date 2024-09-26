@@ -39,6 +39,12 @@ function nonNested() {
         async getAllValues() {
             return obj; // Return the whole object
         },
+
+        
+        async acquire() {
+            return mutex.acquire()
+        }
+        
     };
 }
 
@@ -103,6 +109,11 @@ function nested() {
         async getAllValues() {
             return obj; // Return the whole object
         },
+
+        async acquire() {
+            return mutex.acquire()
+        }
+        
     };
 }
 
@@ -186,6 +197,11 @@ function nestedInvokeWith() {
         async getAllValues() {
             return obj; // Return the whole object
         },
+
+        async acquire() {
+            return mutex.acquire()
+        }
+        
     };
 }
 

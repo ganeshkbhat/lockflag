@@ -35,6 +35,11 @@ function valueBased() {
                 release();  // Release the lock after setting the value
             }
         },
+
+        async acquire() {
+            return mutex.acquire()
+        }
+        
     };
 }
 
