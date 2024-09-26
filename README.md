@@ -94,3 +94,4 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 
 - include array value mutex (use queues package) for semaphore queue
 - include key or flag to be specified key and not just a function acquire/release lock
+- isAcquired function
