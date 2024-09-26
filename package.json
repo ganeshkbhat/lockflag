@@ -24,7 +24,7 @@
     "distributed", "lock", "flag", "critical", "flag", "sempaphore",
     "synchronized", "async", "asynchronized",
     "value", "json", "json nested", "json nested value", "json nested invoke with",
-    "mutex", "async"
+    "mutex"
   ],
   "devDependencies": {
     "chai": "^4.3.7",
