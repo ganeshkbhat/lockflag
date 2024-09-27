@@ -23,6 +23,10 @@ function queue(initialSize = 0) {
     const mutex = createMutex();
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
         // Get value at a specific index
         async getValue(index) {
             return arr[index];
@@ -92,6 +96,11 @@ function invokeWith(initialSize = 0) {
     const mutex = createMutex();
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
+
         // Get value at a specific index
         async getValue(index) {
             return arr[index];

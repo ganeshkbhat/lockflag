@@ -20,6 +20,10 @@ function createMutex() {
   let queue = [];
   let locked = false;
 
+  function isAcquired() {
+    return locked;
+  }
+
   function acquire() {
     const unlock = () => {
       if (queue.length > 0) {
@@ -40,7 +44,7 @@ function createMutex() {
     });
   }
 
-  return { acquire };
+  return { acquire, isAcquired };
 }
 
 module.exports = createMutex;

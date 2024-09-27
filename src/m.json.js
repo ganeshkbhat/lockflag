@@ -23,6 +23,10 @@ function nonNested() {
     const mutex = createMutex();
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
         async getValue(key) {
             return obj[key]; // Return the value for the specified key
         },
@@ -40,11 +44,11 @@ function nonNested() {
             return obj; // Return the whole object
         },
 
-        
+
         async acquire() {
-            return mutex.acquire()
+            return mutex.acquire();
         }
-        
+
     };
 }
 
@@ -56,6 +60,10 @@ function nonNestedInvokeWith() {
     const mutex = createMutex();
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
         async getValue(key) {
             return obj[key]; // Return the value for the specified key
         },
@@ -73,11 +81,11 @@ function nonNestedInvokeWith() {
             return obj; // Return the whole object
         },
 
-        
+
         async acquire() {
-            return mutex.acquire()
+            return mutex.acquire();
         }
-        
+
     };
 }
 
@@ -127,6 +135,10 @@ function nested() {
     }
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
         async getValue(keyPath) {
             return getNestedValue(keyPath); // Return the value for the nested key
         },
@@ -145,9 +157,9 @@ function nested() {
         },
 
         async acquire() {
-            return mutex.acquire()
+            return mutex.acquire();
         }
-        
+
     };
 }
 
@@ -215,6 +227,10 @@ function nestedInvokeWith() {
     }
 
     return {
+        async isAcquired() {
+            return mutex.isAcquired();
+        },
+
         async getValue(keyPath) {
             return getNestedValue(keyPath); // Return the value for the nested key
         },
@@ -233,9 +249,9 @@ function nestedInvokeWith() {
         },
 
         async acquire() {
-            return mutex.acquire()
+            return mutex.acquire();
         }
-        
+
     };
 }
 

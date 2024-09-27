@@ -19,56 +19,64 @@
 const createMutex = require("./mutex.js");
 
 function valueBased() {
-    let value = null;
-    const mutex = createMutex();
+  let value = null;
+  const mutex = createMutex();
 
-    return {
-        async getValue() {
-            return value;
-        },
+  return {
+    async isAcquired() {
+      return mutex.isAcquired();
+    },
 
-        async setValue(newValue) {
-            const release = await mutex.acquire();
-            try {
-                value = newValue;
-            } finally {
-                release();  // Release the lock after setting the value
-            }
-        },
+    async getValue() {
+      return value;
+    },
 
-        async acquire() {
-            return mutex.acquire()
-        }
-        
-    };
+    async setValue(newValue) {
+      const release = await mutex.acquire();
+      try {
+        value = newValue;
+      } finally {
+        release();  // Release the lock after setting the value
+      }
+    },
+
+    async acquire() {
+      return mutex.acquire();
+    }
+
+  };
 }
 
 module.exports.value = valueBased;
 
-  function invokeWith(initialValue = null) {
-    let value = initialValue; // Private value
-    const mutex = createMutex();
-  
-    return {
-      // Get the current value
-      async getValue() {
-        return value;
-      },
-  
-      // Set the value with valueTransformer
-      async setValue(newValue, valueTransformer = (val) => val) {
-        const release = await mutex.acquire();
-        try {
-          value = valueTransformer(newValue); // Apply transformation and set the value
-        } finally {
-          release(); // Release the lock after setting the value
-        }
-      },
-    };
-  }
+function invokeWith(initialValue = null) {
+  let value = initialValue; // Private value
+  const mutex = createMutex();
+
+  return {
+    async isAcquired() {
+      return mutex.isAcquired();
+    },
+
+    // Get the current value
+    async getValue() {
+      return value;
+    },
+
+    // Set the value with valueTransformer
+    async setValue(newValue, valueTransformer = (val) => val) {
+      const release = await mutex.acquire();
+      try {
+        value = valueTransformer(newValue); // Apply transformation and set the value
+      } finally {
+        release(); // Release the lock after setting the value
+      }
+    },
+  };
+}
 
 module.exports.invokeWith = invokeWith;
-  
+
 // // Usage
 // (async () => {
 //     const manager = valueBased();
