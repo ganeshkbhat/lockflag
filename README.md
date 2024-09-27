@@ -4,7 +4,7 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 <b>ps</b>: if you wish to use the acquire and release functions manually use the same setter functions with the last argument of auto with a false value.
 
 ##### for example: 
-if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)`. 
+if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)` to use the acquire and release functions manually. 
 
 
 the `last argument of all setter functions` (including `setValue`, `push`, `removeAt`, `shift`) has a variable argument called `auto` set with a `default true`, which `allows the setter functions to be used directly safely assuming the acquire and release functions will be called automatically`. 
@@ -70,7 +70,9 @@ const manager = mutex.value();
 ```
 
 
-### value based mutex
+### value based mutex with manual acquire and release functions
+
+if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)` to use the acquire and release functions manually. 
 
 ```
 // if you are using the manual acquire and release functions 
