@@ -84,8 +84,18 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
     console.log(await manager.getValue()); // null
     const release = await manager.acquire();
     await manager.setValue(42, false);
+    await manager.setValue(41, false);
+    console.log(await manager.getValue()); // 41
     release();
-    console.log(await manager.getValue()); // 42
+    console.log(await manager.getValue()); // 41
+    try {
+        await manager.setValue(34, false);
+    } catch(e) {
+        console.log("ERROR LOG: ", e);
+    } finally {
+        console.log("\nThe was an demo or an example of acquire lock manually used");
+    }
+    
 })();
 ```
 
