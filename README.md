@@ -28,6 +28,23 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 ```
 
 
+### value based mutex with invokeWith transformer function
+
+```
+(async () => {
+    const valueManager = createValueManager();
+
+    // Set value with transformation (e.g., multiply by 2)
+    await valueManager.setValue(42, (val) => val * 2);
+    console.log(await valueManager.getValue()); // 84
+
+    // Set value without transformation
+    await valueManager.setValue(50);
+    console.log(await valueManager.getValue()); // 50
+})();
+```
+
+
 ### json single value mutex 
 
 ```
@@ -40,6 +57,13 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
     console.log(await manager.getValue('key2')); // hello
     console.log(await manager.getAllValues()); // { key1: 42, key2: 'hello' }
 })();
+```
+
+
+### json single value mutex with invokeWith transformer function
+
+```
+
 ```
 
 
@@ -70,7 +94,7 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 ```
 
 
-### json nested value with function invoke mutex 
+### json nested value mutex with invokeWith transformer function
 
 ```
 (async () => {
@@ -103,4 +127,5 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 
 
 - include key or flag to be specified key and not just a function acquire/release lock
-- isAcquired function
+
+

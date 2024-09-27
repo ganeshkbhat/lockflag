@@ -55,6 +55,22 @@ function nonNested() {
 module.exports.nonNested = nonNested;
 
 
+// // Usage
+// (async () => {
+//     const manager = nonNested();
+
+//     console.log(await manager.getValue('key1')); // undefined
+
+//     await manager.setValue('key1', 42);
+//     await manager.setValue('key2', 'hello');
+
+//     console.log(await manager.getValue('key1')); // 42
+//     console.log(await manager.getValue('key2')); // hello
+
+//     console.log(await manager.getAllValues()); // { key1: 42, key2: 'hello' }
+// })();
+
+
 function nonNestedInvokeWith() {
     let obj = {}; // Private object to store key-value pairs
     const mutex = createMutex();
@@ -94,12 +110,12 @@ module.exports.nonNestedInvokeWith = nonNestedInvokeWith;
 
 // // Usage
 // (async () => {
-//     const manager = nonNested();
+//     const manager = nonNestedInvokeWith();
 
 //     console.log(await manager.getValue('key1')); // undefined
 
-//     await manager.setValue('key1', 42);
-//     await manager.setValue('key2', 'hello');
+//     await manager.setValue('key1', 42, (val) => { console.log("set value with transformer function: ", val); return val; }); // 
+//     await manager.setValue('key2', 'hello', (val) => { console.log("set value with transformer function:", val); return val; }); // 
 
 //     console.log(await manager.getValue('key1')); // 42
 //     console.log(await manager.getValue('key2')); // hello
