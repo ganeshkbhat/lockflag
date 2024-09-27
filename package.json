@@ -1,6 +1,6 @@
 {
   "name": "xmutex",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex",
   "main": "index.js",
   "directories": {
@@ -24,7 +24,13 @@
     "distributed", "lock", "flag", "critical", "flag", "sempaphore",
     "synchronized", "async", "asynchronized",
     "value", "json", "json nested", "json nested value", "json nested invoke with",
-    "mutex"
+    "mutex", "sempaphore", "queue", "semaphore json",
+    "value mutation with acquire and release",
+    "json mutation with acquire and release",
+    "value mutex", "json mutex", "array mutex",
+    "value mutex with auto acquire and release", 
+    "json mutex with auto acquire and release", 
+    "array mutex with auto acquire and release"
   ],
   "devDependencies": {
     "chai": "^4.3.7",
