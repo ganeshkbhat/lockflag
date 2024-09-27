@@ -3,9 +3,9 @@
  * Package: 
  * Author: Ganesh B
  * Description: 
- * Install: npm i  --save
+ * Install: npm i xmutex --save
  * Github: https://github.com/ganeshkbhat/lockflag
- * npmjs Link: https://www.npmjs.com/package/
+ * npmjs Link: https://www.npmjs.com/package/xmutex
  * File: index.js
  * File Description: 
  * 
@@ -50,20 +50,54 @@ function nonNested() {
 
 module.exports.nonNested = nonNested;
 
-// Usage
-(async () => {
-    const manager = nonNested();
 
-    console.log(await manager.getValue('key1')); // undefined
+function nonNestedInvokeWith() {
+    let obj = {}; // Private object to store key-value pairs
+    const mutex = createMutex();
 
-    await manager.setValue('key1', 42);
-    await manager.setValue('key2', 'hello');
+    return {
+        async getValue(key) {
+            return obj[key]; // Return the value for the specified key
+        },
 
-    console.log(await manager.getValue('key1')); // 42
-    console.log(await manager.getValue('key2')); // hello
+        async setValue(key, newValue, valueTransformer) {
+            const release = await mutex.acquire();
+            try {
+                obj[key] = valueTransformer(newValue); // Set the value for the specific key
+            } finally {
+                release();  // Release the lock after setting the value
+            }
+        },
 
-    console.log(await manager.getAllValues()); // { key1: 42, key2: 'hello' }
-})();
+        async getAllValues() {
+            return obj; // Return the whole object
+        },
+
+        
+        async acquire() {
+            return mutex.acquire()
+        }
+        
+    };
+}
+
+module.exports.nonNestedInvokeWith = nonNestedInvokeWith;
+
+
+// // Usage
+// (async () => {
+//     const manager = nonNested();
+
+//     console.log(await manager.getValue('key1')); // undefined
+
+//     await manager.setValue('key1', 42);
+//     await manager.setValue('key2', 'hello');
+
+//     console.log(await manager.getValue('key1')); // 42
+//     console.log(await manager.getValue('key2')); // hello
+
+//     console.log(await manager.getAllValues()); // { key1: 42, key2: 'hello' }
+// })();
 
 
 function nested() {
@@ -121,32 +155,32 @@ function nested() {
 module.exports.nested = nested;
 
 
-// Usage
-(async () => {
-    const manager = nested();
+// // Usage
+// (async () => {
+//     const manager = nested();
 
-    console.log(await manager.getValue('key1')); // undefined
+//     console.log(await manager.getValue('key1')); // undefined
 
-    await manager.setValue('key1', 42); // Single level
-    await manager.setValue('key2.subkey1', 'hello'); // Nested level
-    await manager.setValue('key2.subkey2.subkey3', 'world'); // More deeply nested
-    await manager.setValue('key3.key1', 42); // Single level
-    await manager.setValue('key4', { "key1": 42 }); // Single level
+//     await manager.setValue('key1', 42); // Single level
+//     await manager.setValue('key2.subkey1', 'hello'); // Nested level
+//     await manager.setValue('key2.subkey2.subkey3', 'world'); // More deeply nested
+//     await manager.setValue('key3.key1', 42); // Single level
+//     await manager.setValue('key4', { "key1": 42 }); // Single level
 
-    console.log(await manager.getValue('key1')); // 42
-    console.log(await manager.getValue('key2.subkey1')); // hello
-    console.log(await manager.getValue('key2.subkey2.subkey3')); // world
+//     console.log(await manager.getValue('key1')); // 42
+//     console.log(await manager.getValue('key2.subkey1')); // hello
+//     console.log(await manager.getValue('key2.subkey2.subkey3')); // world
 
-    console.log(await manager.getAllValues());
-    // Output:
-    // {
-    //   key1: 42,
-    //   key2: {
-    //     subkey1: 'hello',
-    //     subkey2: { subkey3: 'world' }
-    //   }
-    // }
-})();
+//     console.log(await manager.getAllValues());
+//     // Output:
+//     // {
+//     //   key1: 42,
+//     //   key2: {
+//     //     subkey1: 'hello',
+//     //     subkey2: { subkey3: 'world' }
+//     //   }
+//     // }
+// })();
 
 
 function nestedInvokeWith() {
@@ -207,33 +241,34 @@ function nestedInvokeWith() {
 
 module.exports.nestedInvokeWith = nestedInvokeWith;
 
-// Usage
-(async () => {
-    const manager = nestedInvokeWith();
+// // Usage
+// (async () => {
+//     const manager = nestedInvokeWith();
 
-    console.log(await manager.getValue('key1')); // undefined
+//     console.log(await manager.getValue('key1')); // undefined
 
-    // Setting a value and then invoking a transformer
-    await manager.setValue('key1', 42, (newValue) => {
-        console.log('Value set for key1:', newValue); // Output: Value set for key1: 42
-    });
+//     // Setting a value and then invoking a transformer
+//     await manager.setValue('key1', 42, (newValue) => {
+//         console.log('Value set for key1:', newValue); // Output: Value set for key1: 42
+//     });
 
-    console.log(await manager.getValue('key1')); // 42
+//     console.log(await manager.getValue('key1')); // 42
 
-    // Setting a nested value and then invoking a transformer
-    await manager.setValue('key2.subkey1', 'hello', (newValue) => {
-        console.log('Value set for key2.subkey1:', newValue); // Output: Value set for key2.subkey1: hello
-    });
+//     // Setting a nested value and then invoking a transformer
+//     await manager.setValue('key2.subkey1', 'hello', (newValue) => {
+//         console.log('Value set for key2.subkey1:', newValue); // Output: Value set for key2.subkey1: hello
+//     });
 
-    console.log(await manager.getValue('key2.subkey1')); // hello
+//     console.log(await manager.getValue('key2.subkey1')); // hello
 
-    // Check the entire object
-    console.log(await manager.getAllValues());
-    // Output:
-    // {
-    //   key1: 42,
-    //   key2: {
-    //     subkey1: 'hello'
-    //   }
-    // }
-})();
+//     // Check the entire object
+//     console.log(await manager.getAllValues());
+//     // Output:
+//     // {
+//     //   key1: 42,
+//     //   key2: {
+//     //     subkey1: 'hello'
+//     //   }
+//     // }
+// })();
+

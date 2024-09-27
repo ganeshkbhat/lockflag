@@ -3,9 +3,9 @@
  * Package: 
  * Author: Ganesh B
  * Description: 
- * Install: npm i  --save
+ * Install: npm i xmutex --save
  * Github: https://github.com/ganeshkbhat/lockflag
- * npmjs Link: https://www.npmjs.com/package/
+ * npmjs Link: https://www.npmjs.com/package/xmutex
  * File: index.js
  * File Description: 
  * 
@@ -43,15 +43,39 @@ function valueBased() {
     };
 }
 
-module.exports = valueBased;
+module.exports.value = valueBased;
 
-// Usage
-(async () => {
-    const manager = valueBased();
+  function invokeWith(initialValue = null) {
+    let value = initialValue; // Private value
+    const mutex = createMutex();
+  
+    return {
+      // Get the current value
+      async getValue() {
+        return value;
+      },
+  
+      // Set the value with valueTransformer
+      async setValue(newValue, valueTransformer = (val) => val) {
+        const release = await mutex.acquire();
+        try {
+          value = valueTransformer(newValue); // Apply transformation and set the value
+        } finally {
+          release(); // Release the lock after setting the value
+        }
+      },
+    };
+  }
 
-    console.log(await manager.getValue()); // null
+module.exports.invokeWith = invokeWith;
+  
+// // Usage
+// (async () => {
+//     const manager = valueBased();
 
-    await manager.setValue(42);
+//     console.log(await manager.getValue()); // null
 
-    console.log(await manager.getValue()); // 42
-})();
+//     await manager.setValue(42);
+
+//     console.log(await manager.getValue()); // 42
+// })();

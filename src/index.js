@@ -3,9 +3,9 @@
  * Package: 
  * Author: Ganesh B
  * Description: 
- * Install: npm i  --save
+ * Install: npm i xmutex --save
  * Github: https://github.com/ganeshkbhat/lockflag
- * npmjs Link: https://www.npmjs.com/package/
+ * npmjs Link: https://www.npmjs.com/package/xmutex
  * File: index.js
  * File Description: 
  * 
@@ -16,13 +16,23 @@
 
 'use strict';
 
-const lk = require("./m.json.js")
+const jk = require("./m.json.js");
+const ak = require("./m.array.js");
+const vk = require("./m.value.js");
 
 module.exports = {
     "json": {
-        "invokeWith": lk.nestedInvokeWith,
-        "nested": lk.nested,
-        "nonNested": lk.nonNested,
+        "nestedInvokeWith": jk.nestedInvokeWith,
+        "nonNestedInvokeWith": jk.nonNestedInvokeWith,
+        "nested": jk.nested,
+        "nonNested": jk.nonNested
     },
-    "value": require("./m.value.js")
+    "array": {
+        "queue": ak.queue,
+        "invokeWith": ak.invokeWith
+    },
+    "value": {
+        "value": vk.value,
+        "invokeWith": vk.invokeWith,
+    }
 }

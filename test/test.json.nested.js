@@ -3,9 +3,9 @@
  * Package: 
  * Author: Ganesh B
  * Description: 
- * Install: npm i  --save
+ * Install: npm i xmutex --save
  * Github: https://github.com/ganeshkbhat/lockflag
- * npmjs Link: https://www.npmjs.com/package/
+ * npmjs Link: https://www.npmjs.com/package/xmutex
  * File: index.js
  * File Description: 
  * 
@@ -15,7 +15,6 @@
 /* eslint no-console: 0 */
 
 'use strict';
-
 
 const { expect } = require('chai');
 const sinon = require('sinon');
