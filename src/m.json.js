@@ -31,17 +31,25 @@ function nonNested() {
             return obj[key]; // Return the value for the specified key
         },
 
-        async setValue(key, newValue) {
-            const release = await mutex.acquire();
+        async setValue(key, newValue, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+
             try {
                 obj[key] = newValue; // Set the value for the specific key
             } finally {
-                release();  // Release the lock after setting the value
+                if (!!auto) {
+                    release();  // Release the lock after setting the value
+                }
             }
         },
 
         async getAllValues() {
-            return obj; // Return the whole object
+            if (!!auto) {
+                return obj; // Return the whole object
+            }
         },
 
 
@@ -84,12 +92,18 @@ function nonNestedInvokeWith() {
             return obj[key]; // Return the value for the specified key
         },
 
-        async setValue(key, newValue, valueTransformer) {
-            const release = await mutex.acquire();
+        async setValue(key, newValue, valueTransformer, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+
             try {
                 obj[key] = valueTransformer(newValue); // Set the value for the specific key
             } finally {
-                release();  // Release the lock after setting the value
+                if (!!auto) {
+                    release();  // Release the lock after setting the value
+                }
             }
         },
 
@@ -159,12 +173,18 @@ function nested() {
             return getNestedValue(keyPath); // Return the value for the nested key
         },
 
-        async setValue(keyPath, newValue) {
-            const release = await mutex.acquire();
+        async setValue(keyPath, newValue, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+
             try {
                 setNestedValue(keyPath, newValue); // Set the value for the nested key
             } finally {
-                release();  // Release the lock after setting the value
+                if (!!auto) {
+                    release();  // Release the lock after setting the value
+                }
             }
         },
 
@@ -251,12 +271,18 @@ function nestedInvokeWith() {
             return getNestedValue(keyPath); // Return the value for the nested key
         },
 
-        async setValue(keyPath, newValue, valueTransformer) {
-            const release = await mutex.acquire();
+        async setValue(keyPath, newValue, valueTransformer, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+
             try {
                 setNestedValue(keyPath, newValue, valueTransformer); // Set the new value and invoke the transformer
             } finally {
-                release();  // Release the lock after setting the value
+                if (!!auto) {
+                    release();  // Release the lock after setting the value
+                }
             }
         },
 

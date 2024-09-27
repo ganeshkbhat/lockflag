@@ -31,12 +31,18 @@ function valueBased() {
       return value;
     },
 
-    async setValue(newValue) {
-      const release = await mutex.acquire();
+    async setValue(newValue, auto = true) {
+      let release;
+      if (!!auto) {
+        release = await mutex.acquire();
+      }
+
       try {
         value = newValue;
       } finally {
-        release();  // Release the lock after setting the value
+        if (!!auto) {
+          release();  // Release the lock after setting the value
+        }
       }
     },
 
@@ -64,12 +70,18 @@ function invokeWith(initialValue = null) {
     },
 
     // Set the value with valueTransformer
-    async setValue(newValue, valueTransformer = (val) => val) {
-      const release = await mutex.acquire();
+    async setValue(newValue, valueTransformer = (val) => val, auto = true) {
+      let release;
+      if (!!auto) {
+        release = await mutex.acquire();
+      }
+
       try {
         value = valueTransformer(newValue); // Apply transformation and set the value
       } finally {
-        release(); // Release the lock after setting the value
+        if (!!auto) {
+          release(); // Release the lock after setting the value
+        }
       }
     },
   };

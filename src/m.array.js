@@ -33,44 +33,66 @@ function queue(initialSize = 0) {
         },
 
         // Set value at a specific index
-        async setValue(index, newValue) {
-            const release = await mutex.acquire();
+        async setValue(index, newValue, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
                 }
                 arr[index] = newValue; // Set the new value at the specified index
             } finally {
-                release(); // Release the lock after setting the value
+                if (!!auto) {
+                    release(); // Release the lock after setting the value
+                }
             }
         },
 
         // Push new value to the end of the array (enqueue)
-        async push(newValue) {
-            const release = await mutex.acquire();
+        async push(newValue, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 arr.push(newValue); // Add new value to the end of the array
             } finally {
-                release(); // Release the lock after push operation
+                if (!!auto) {
+                    release(); // Release the lock after push operation
+                }
             }
         },
 
         // Shift the first value from the array (dequeue)
-        async shift() {
-            const release = await mutex.acquire();
+        async shift(auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
                 }
                 return arr.shift(); // Remove and return the first element
             } finally {
-                release(); // Release the lock after shift operation
+                if (!!auto) {
+                    release(); // Release the lock after shift operation
+                }
             }
         },
 
         // Remove value at a specific index
-        async removeAt(index) {
-            const release = await mutex.acquire();
+        async removeAt(index, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
@@ -78,7 +100,9 @@ function queue(initialSize = 0) {
                 const removedValue = arr.splice(index, 1)[0]; // Remove the element at the index and return it
                 return removedValue;
             } finally {
-                release(); // Release the lock after removal
+                if (!!auto) {
+                    release(); // Release the lock after removal
+                }
             }
         },
 
@@ -96,6 +120,10 @@ function invokeWith(initialSize = 0) {
     const mutex = createMutex();
 
     return {
+        async acquire() {
+            return await mutex.acquire();
+        },
+
         async isAcquired() {
             return mutex.isAcquired();
         },
@@ -107,44 +135,66 @@ function invokeWith(initialSize = 0) {
         },
 
         // Set value at a specific index with valueTransformer
-        async setValue(index, newValue, valueTransformer = (val) => val) {
-            const release = await mutex.acquire();
+        async setValue(index, newValue, valueTransformer = (val) => val, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
                 }
                 arr[index] = valueTransformer(newValue); // Set the transformed value at the specified index
             } finally {
-                release(); // Release the lock after setting the value
+                if (!!auto) {
+                    release(); // Release the lock after setting the value
+                }
             }
         },
 
         // Push new value to the end of the array (enqueue) with valueTransformer
-        async push(newValue, valueTransformer = (val) => val) {
-            const release = await mutex.acquire();
+        async push(newValue, valueTransformer = (val) => val, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 arr.push(valueTransformer(newValue)); // Add transformed new value to the end of the array
             } finally {
-                release(); // Release the lock after push operation
+                if (!!auto) {
+                    release(); // Release the lock after push operation
+                }
             }
         },
 
         // Shift the first value from the array (dequeue) and apply valueTransformer on the removed value
-        async shift(valueTransformer = (val) => val) {
-            const release = await mutex.acquire();
+        async shift(valueTransformer = (val) => val, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
                 }
                 return valueTransformer(arr.shift()); // Apply valueTransformer on the shifted value
             } finally {
-                release(); // Release the lock after shift operation
+                if (!!auto) {
+                    release(); // Release the lock after shift operation
+                }
             }
         },
 
         // Remove value at a specific index with valueTransformer
-        async removeAt(index, valueTransformer = (val) => val) {
-            const release = await mutex.acquire();
+        async removeAt(index, valueTransformer = (val) => val, auto = true) {
+            let release;
+            if (!!auto) {
+                release = await mutex.acquire();
+            }
+            
             try {
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
@@ -152,7 +202,9 @@ function invokeWith(initialSize = 0) {
                 const removedValue = arr.splice(index, 1)[0]; // Remove the element at the index
                 return valueTransformer(removedValue); // Return the transformed removed value
             } finally {
-                release(); // Release the lock after removal
+                if (!!auto) {
+                    release(); // Release the lock after removal
+                }
             }
         },
 
