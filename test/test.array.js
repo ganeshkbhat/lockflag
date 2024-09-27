@@ -23,7 +23,7 @@ const { expect } = chai;
 // Import the object manager function
 const createObjectManager  = require('../index'); // Adjust the path
 
-describe('Array Manager with Mutex', function () {
+describe('createObjectManager Array Manager with Mutex', function () {
   let arrayManager;
 
   beforeEach(() => {

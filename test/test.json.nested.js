@@ -22,7 +22,7 @@ const sinon = require('sinon');
 // Import the object manager function
 const createObjectManager  = require('../index'); // Adjust the path
 
-describe('createObjectManager tests for json nested set and get with acquire and release locks', function () {
+describe('createObjectManager json nested manager with mutex tests for json nested set and get with acquire and release locks', function () {
     let manager;
     let acquireStub, releaseStub;
 
