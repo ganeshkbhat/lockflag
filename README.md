@@ -79,7 +79,7 @@ const manager = mutex.value();
 //      as the last argument 
 
 (async () => {
-    const manager = mutex.value();
+    const manager = mutex.value.value();
     console.log(await manager.getValue()); // null
     const release = manager.acquire();
     await manager.setValue(42);

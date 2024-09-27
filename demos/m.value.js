@@ -20,7 +20,7 @@ const mutex = require("../index");
 
 // Usage
 (async () => {
-    const manager = mutex.value();
+    const manager = mutex.value.value();
 
     console.log(await manager.getValue()); // null
 

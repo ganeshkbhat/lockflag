@@ -16,9 +16,11 @@
 
 'use strict';
 
+const mutex = require("../index");
+
 // Usage Example
 (async () => {
-    const valueManager = createValueManager();
+    const valueManager = mutex.value.invokeWith();
 
     // Set value with transformation (e.g., multiply by 2)
     await valueManager.setValue(42, (val) => val * 2);
