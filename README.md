@@ -11,15 +11,15 @@ the `last argument of all setter functions` (including `setValue`, `push`, `remo
 
 
 
-method implementation with auto definition:
+method implementation with auto definition, auto default is true:
 
-`(method) shift(auto?: boolean): Promise<any>`
+`(method) setValue(auto?: boolean): Promise<any>`
 
 
 
-method implementation with valueTransformer with auto definition:
+method implementation with valueTransformer with auto definition, auto default is true:
 
-`(method) shift(valueTransformer?: (val: any) => any, auto?: boolean): Promise<any>`
+`(method) setValue(valueTransformer?: (val: any) => any, auto?: boolean): Promise<any>`
 
 
 ### List of implementations:
