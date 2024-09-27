@@ -22,7 +22,7 @@ const sinon = require('sinon');
 // Import the object manager function
 const createObjectManager  = require('../index'); // Adjust the path
 
-describe('createObjectManager Value Manager tests for single value set and get with acquire and release locks', function () {
+describe('createObjectManager Value Manager tests for single value set and get with acquire and release locks test', function () {
     let manager;
     let acquireStub, releaseStub;
 

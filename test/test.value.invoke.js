@@ -23,7 +23,7 @@ const { expect } = chai;
 // Import the object manager function
 const createObjectManager  = require('../index'); // Adjust the path to the file
 
-describe('createObjectManager Value Manager with Mutex and Value Transformer', function () {
+describe('createObjectManager Value Manager with Mutex and Value Transformer tests', function () {
   let valueManager;
 
   beforeEach(() => {
