@@ -1,9 +1,10 @@
 # lockflag
 javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value or alternatively use the acquire and release function manually. 
 
-ps: if you wish to use the acquire and release functions manually use the same setter functions with the last argument of auto with a false value.
+##### ps: 
+if you wish to use the acquire and release functions manually use the same setter functions with the last argument of auto with a false value.
 
-for example: 
+##### for example: 
 if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)`. 
 
 
