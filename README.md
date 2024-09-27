@@ -130,7 +130,7 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 ```
 
 
-### array based mutex
+### semaphore queue or array based mutex
 
 ```
 (async () => {
@@ -155,7 +155,7 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 ```
 
 
-### array based mutex with invokeWith transformer function
+### semaphore queue or array based mutex with invokeWith transformer function
 
 ```
 (async () => {
