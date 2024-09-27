@@ -83,7 +83,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
     const manager = mutex.value.value();
     console.log(await manager.getValue()); // null
     const release = manager.acquire();
-    await manager.setValue(42);
+    await manager.setValue(42, false);
     release();
     console.log(await manager.getValue()); // 42
 })();
