@@ -38,7 +38,7 @@ method implementation with valueTransformer with auto definition, `auto default`
 ### Usage of package
 
 ```
-const mutex = require("xmutex);
+const mutex = require("xmutex");
 const manager = mutex.value();
 ```
 
