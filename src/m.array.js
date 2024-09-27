@@ -38,7 +38,7 @@ function queue(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
@@ -57,7 +57,7 @@ function queue(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 arr.push(newValue); // Add new value to the end of the array
             } finally {
@@ -73,7 +73,7 @@ function queue(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
@@ -92,7 +92,7 @@ function queue(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
@@ -110,6 +110,10 @@ function queue(initialSize = 0) {
         async getAllValues() {
             return arr;
         },
+
+        async acquire() {
+            return await mutex.acquire();
+        }
     };
 }
 
@@ -120,14 +124,10 @@ function invokeWith(initialSize = 0) {
     const mutex = createMutex();
 
     return {
-        async acquire() {
-            return await mutex.acquire();
-        },
 
         async isAcquired() {
             return mutex.isAcquired();
         },
-
 
         // Get value at a specific index
         async getValue(index) {
@@ -140,7 +140,7 @@ function invokeWith(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
@@ -159,7 +159,7 @@ function invokeWith(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 arr.push(valueTransformer(newValue)); // Add transformed new value to the end of the array
             } finally {
@@ -175,7 +175,7 @@ function invokeWith(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
@@ -194,7 +194,7 @@ function invokeWith(initialSize = 0) {
             if (!!auto) {
                 release = await mutex.acquire();
             }
-            
+
             try {
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
@@ -212,6 +212,10 @@ function invokeWith(initialSize = 0) {
         async getAllValues() {
             return arr;
         },
+
+        async acquire() {
+            return await mutex.acquire();
+        }
     };
 }
 

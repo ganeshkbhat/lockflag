@@ -50,9 +50,8 @@ function nonNested() {
                 return obj; // Return the whole object
         },
 
-
         async acquire() {
-            return mutex.acquire();
+            return await mutex.acquire();
         }
 
     };
@@ -109,9 +108,8 @@ function nonNestedInvokeWith() {
             return obj; // Return the whole object
         },
 
-
         async acquire() {
-            return mutex.acquire();
+            return await mutex.acquire();
         }
 
     };
@@ -191,7 +189,7 @@ function nested() {
         },
 
         async acquire() {
-            return mutex.acquire();
+            return await mutex.acquire();
         }
 
     };
@@ -289,7 +287,7 @@ function nestedInvokeWith() {
         },
 
         async acquire() {
-            return mutex.acquire();
+            return await mutex.acquire();
         }
 
     };

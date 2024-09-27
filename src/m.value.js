@@ -47,7 +47,7 @@ function valueBased() {
     },
 
     async acquire() {
-      return mutex.acquire();
+      return await mutex.acquire();
     }
 
   };
@@ -84,6 +84,10 @@ function invokeWith(initialValue = null) {
         }
       }
     },
+    
+    async acquire() {
+      return await mutex.acquire();
+    }
   };
 }
 
