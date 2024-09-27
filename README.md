@@ -3,9 +3,9 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 
 - value based mutex 
 - value based with invoke function mutex
-- json single value mutex acquire/release
+- json single value mutex 
 - json single value with invoke function mutex
-- json nested value mutex acquire/release
+- json nested value mutex 
 - json nested value with invoke function mutex
 - semaphore array queue 
 - semaphore array queue with invoke function mutex 
