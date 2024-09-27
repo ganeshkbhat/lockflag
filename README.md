@@ -63,7 +63,19 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 ### json single value mutex with invokeWith transformer function
 
 ```
+(async () => {
+    const manager = mutex.json.nonNestedInvokeWith();
 
+    console.log(await manager.getValue('key1')); // undefined
+
+    await manager.setValue('key1', 42, (val) => { console.log("set value with transformer function: ", val); return val; }); // 
+    await manager.setValue('key2', 'hello', (val) => { console.log("set value with transformer function:", val); return val; }); // 
+
+    console.log(await manager.getValue('key1')); // 42
+    console.log(await manager.getValue('key2')); // hello
+
+    console.log(await manager.getAllValues()); // { key1: 42, key2: 'hello' }
+})();
 ```
 
 
@@ -119,6 +131,58 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
     //     subkey1: 'hello'
     //   }
     // }
+})();
+```
+
+
+### array based mutex
+
+```
+(async () => {
+    const arrayManager = mutex.array.queue();
+
+    // Push some values
+    await arrayManager.push(42);
+    await arrayManager.push('hello');
+    await arrayManager.push('world');
+    console.log(await arrayManager.getAllValues()); // [42, 'hello', 'world']
+
+    // Remove value at index 1
+    const removedValue = await arrayManager.removeAt(1);
+    console.log(removedValue); // 'hello'
+    console.log(await arrayManager.getAllValues()); // [42, 'world']
+
+    // Remove value at an out-of-bounds index
+    const invalidRemove = await arrayManager.removeAt(5);
+    console.log(invalidRemove); // undefined
+    console.log(await arrayManager.getAllValues()); // [42, 'world']
+})();
+```
+
+
+### array based mutex with invokeWith transformer function
+
+```
+(async () => {
+    const arrayManager = mutex.array.invokeWith();
+
+    // Set value with transformation (e.g., multiply by 2)
+    await arrayManager.setValue(0, 42, (val) => val * 2);
+    console.log(await arrayManager.getValue(0)); // 84
+
+    // Push value with transformation (e.g., append " world")
+    await arrayManager.push('hello', (val) => val + ' world');
+    console.log(await arrayManager.getAllValues()); // [ 84, 'hello world' ]
+
+    // Shift value with transformation (e.g., convert to uppercase)
+    const shiftedValue = await arrayManager.shift((val) => val.toString().toUpperCase());
+    console.log(shiftedValue); // "84"
+
+    // Remove value with transformation (e.g., reverse the string)
+    const removedValue = await arrayManager.removeAt(0, (val) => val.split('').reverse().join(''));
+    console.log(removedValue); // "dlrow olleh"
+
+    console.log(await arrayManager.getAllValues()); // []
 })();
 ```
 
