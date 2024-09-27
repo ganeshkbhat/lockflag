@@ -40,6 +40,9 @@ function queue(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
                 }
@@ -59,6 +62,9 @@ function queue(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 arr.push(newValue); // Add new value to the end of the array
             } finally {
                 if (!!auto) {
@@ -75,6 +81,9 @@ function queue(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
                 }
@@ -94,6 +103,9 @@ function queue(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
                 }
@@ -142,6 +154,9 @@ function invokeWith(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (index >= arr.length) {
                     arr.length = index + 1; // Extend array size if index is out of bounds
                 }
@@ -161,6 +176,9 @@ function invokeWith(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 arr.push(valueTransformer(newValue)); // Add transformed new value to the end of the array
             } finally {
                 if (!!auto) {
@@ -177,6 +195,9 @@ function invokeWith(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (arr.length === 0) {
                     return undefined; // Return undefined if the array is empty
                 }
@@ -196,6 +217,9 @@ function invokeWith(initialSize = 0) {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 if (index < 0 || index >= arr.length) {
                     return undefined; // Index out of bounds, return undefined
                 }

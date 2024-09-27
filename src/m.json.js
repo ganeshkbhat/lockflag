@@ -38,6 +38,9 @@ function nonNested() {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 obj[key] = newValue; // Set the value for the specific key
             } finally {
                 if (!!auto) {
@@ -47,7 +50,7 @@ function nonNested() {
         },
 
         async getAllValues() {
-                return obj; // Return the whole object
+            return obj; // Return the whole object
         },
 
         async acquire() {
@@ -96,6 +99,9 @@ function nonNestedInvokeWith() {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 obj[key] = valueTransformer(newValue); // Set the value for the specific key
             } finally {
                 if (!!auto) {
@@ -176,6 +182,9 @@ function nested() {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 setNestedValue(keyPath, newValue); // Set the value for the nested key
             } finally {
                 if (!!auto) {
@@ -274,6 +283,9 @@ function nestedInvokeWith() {
             }
 
             try {
+                if (!mutex.isAcquired()) {
+                    throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+                }
                 setNestedValue(keyPath, newValue, valueTransformer); // Set the new value and invoke the transformer
             } finally {
                 if (!!auto) {

@@ -24,9 +24,10 @@ const mutex = require("../index");
     console.log(await manager.getValue()); // null
     const release = await manager.acquire();
     await manager.setValue(42, false);
-    console.log(await manager.getValue()); // 42
     await manager.setValue(41, false);
+    console.log(await manager.getValue()); // 41
     release();
     console.log(await manager.getValue()); // 41
+    await manager.setValue(34, false);
 })();
 

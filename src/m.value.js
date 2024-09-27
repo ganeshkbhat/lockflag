@@ -38,6 +38,9 @@ function valueBased() {
       }
 
       try {
+        if (!mutex.isAcquired()) {
+          throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+        }
         value = newValue;
       } finally {
         if (!!auto) {
@@ -77,6 +80,9 @@ function invokeWith(initialValue = null) {
       }
 
       try {
+        if (!mutex.isAcquired()) {
+          throw new Error("\n Lock not acquired with auto acquire disabled. \n Please make the auto acquire to be true or \n if auto lock is false then acquire the lock manually \n before setting the value \n");
+        }
         value = valueTransformer(newValue); // Apply transformation and set the value
       } finally {
         if (!!auto) {
@@ -84,7 +90,7 @@ function invokeWith(initialValue = null) {
         }
       }
     },
-    
+
     async acquire() {
       return await mutex.acquire();
     }
