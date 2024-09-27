@@ -1,5 +1,28 @@
 # lockflag
-javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value or alternatively use the acquire and release function manually.
+javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value or alternatively use the acquire and release function manually. 
+
+ps: if you wish to use the acquire and release functions manually use the same setter functions with the last argument of auto with a false value.
+
+for example: 
+if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)`. 
+
+
+the `last argument of all setter functions` (including `setValue`, `push`, `removeAt`, `shift`) has a variable argument called `auto` set with a `default true`, which `allows the setter functions to be used directly safely assuming the acquire and release functions will be called automatically`. 
+
+
+
+method implementation with auto definition:
+
+`(method) shift(auto?: boolean): Promise<any>`
+
+
+
+method implementation with valueTransformer with auto definition:
+
+`(method) shift(valueTransformer?: (val: any) => any, auto?: boolean): Promise<any>`
+
+
+### List of implementations:
 
 - value based mutex 
 - value based with invoke function mutex
@@ -10,6 +33,30 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 - semaphore array queue 
 - semaphore array queue with invoke function mutex 
 
+
+### Usage of package
+
+```
+const mutex = require("xmutex);
+const manager = mutex.value();
+```
+
+### Exports of package
+
+```
+"json": {
+    "invokeWith": mutex.json.nestedInvokeWith,
+    "nestedInvokeWith": mutex.json.nestedInvokeWith,
+    "nonNestedInvokeWith": mutex.json.nonNestedInvokeWith,
+    "nested": mutex.json.nested,
+    "nonNested": mutex.json.nonNested
+},
+"array": {
+    "queue": mutex.array.queue,
+    "invokeWith": mutex.array.invokeWith
+},
+"value": mutex.value
+```
 
 ### value based mutex
 
@@ -22,6 +69,21 @@ javascript based lockflag is a mutex like is a simple mutually exclusive flag or
 })();
 ```
 
+
+### value based mutex
+
+```
+// if you are using the manual acquire and release functions 
+//      you may use the same functions with a auto flag 
+//      as the last argument 
+
+(async () => {
+    const manager = mutex.value();
+    console.log(await manager.getValue()); // null
+    await manager.setValue(42);
+    console.log(await manager.getValue()); // 42
+})();
+```
 
 ### value based mutex with invokeWith transformer function
 

@@ -24,7 +24,7 @@ module.exports = {
         "nestedInvokeWith": mutex.json.nestedInvokeWith,
         "nonNestedInvokeWith": mutex.json.nonNestedInvokeWith,
         "nested": mutex.json.nested,
-        "nonNested": mutex.json.nonNested,
+        "nonNested": mutex.json.nonNested
     },
     "array": {
         "queue": mutex.array.queue,
