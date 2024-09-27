@@ -47,9 +47,7 @@ function nonNested() {
         },
 
         async getAllValues() {
-            if (!!auto) {
                 return obj; // Return the whole object
-            }
         },
 
 
