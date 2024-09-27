@@ -1,5 +1,5 @@
 # lockflag
-javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value
+javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value or alternatively use the acquire and release function manually.
 
 - value based mutex 
 - value based with invoke function mutex
