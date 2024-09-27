@@ -2,18 +2,13 @@
 javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex 
 
 - value based mutex with acquire/release
+- value based with invoke function mutex
 - json single value mutex acquire/release
+- json single value with invoke function mutex
 - json nested value mutex acquire/release
-- json nested value with function invoke mutex
-
-<!-- 
-
-- value based with function invoke mutex
-- json single value with function invoke mutex
+- json nested value with invoke function mutex
 - semaphore array queue 
-- semaphore array queue with function invoke mutex 
-
--->
+- semaphore array queue with invoke function mutex 
 
 
 ### value based mutex
