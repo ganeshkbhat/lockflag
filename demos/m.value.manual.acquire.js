@@ -28,6 +28,13 @@ const mutex = require("../index");
     console.log(await manager.getValue()); // 41
     release();
     console.log(await manager.getValue()); // 41
-    await manager.setValue(34, false);
+    try {
+        await manager.setValue(34, false);
+    } catch(e) {
+        console.log("ERROR LOG: ", e);
+    } finally {
+        console.log("\nThe was an demo or an example of acquire lock manually used");
+    }
+    
 })();
 

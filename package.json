@@ -1,6 +1,6 @@
 {
   "name": "xmutex",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex",
   "main": "index.js",
   "directories": {
