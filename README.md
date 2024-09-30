@@ -41,6 +41,7 @@ const mutex = require("xmutex");
 const manager = mutex.value();
 ```
 
+
 ### Exports of package
 
 ```
@@ -57,6 +58,7 @@ const manager = mutex.value();
 },
 "value": mutex.value
 ```
+
 
 ### value based mutex
 
@@ -98,6 +100,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
     
 })();
 ```
+
 
 ### value based mutex with invokeWith transformer function
 
