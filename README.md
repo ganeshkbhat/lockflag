@@ -153,7 +153,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
     await manager.setValue('key1', 42); // Single level
     await manager.setValue('key2.subkey1', 'hello'); // Nested level
     await manager.setValue('key2.subkey2.subkey3', 'world'); // More deeply nested
-    await manager.setValue('key3.key1', 42); // Single level
+    await manager.setValue('key3.key1', 42); // Nested level
     await manager.setValue('key4', { "key1": 42 }); // Single level
     console.log(await manager.getValue('key1')); // 42
     console.log(await manager.getValue('key2.subkey1')); // hello
@@ -206,9 +206,9 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 (async () => {
     const arrayManager = mutex.array.queue();
     // Push some values
-    await arrayManager.push(42);
-    await arrayManager.push('hello');
-    await arrayManager.push('world');
+    await arrayManager.push(42); 
+    await arrayManager.push('hello'); 
+    await arrayManager.push('world'); 
     console.log(await arrayManager.getAllValues()); // [42, 'hello', 'world']
     // Remove value at index 1
     const removedValue = await arrayManager.removeAt(1);
