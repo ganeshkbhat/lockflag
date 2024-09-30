@@ -1,6 +1,27 @@
 # lockflag
 javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex with internal auto acquire/release while setting value or alternatively use the acquire and release function manually. 
 
+
+### List of implementations:
+
+- [&#10003;] value based mutex 
+- [&#10003;] value based with invoke function mutex
+- [&#10003;] json single value mutex 
+- [&#10003;] json single value with invoke function mutex
+- [&#10003;] json nested value mutex 
+- [&#10003;] json nested value with invoke function mutex
+- [&#10003;] semaphore array queue 
+- [&#10003;] semaphore array queue with invoke function mutex 
+
+
+### Usage of package
+
+```
+const mutex = require("xmutex");
+const manager = mutex.value();
+```
+This package comes with internal auto acquire/release while setting value or alternatively use the acquire and release function manually
+
 <b>ps</b>: if you wish to use the acquire and release functions manually use the same setter functions with the last argument of auto with a false value.
 
 ##### for example: 
@@ -10,11 +31,9 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 the `last argument of all setter functions` (including `setValue`, `push`, `removeAt`, `shift`) has a variable argument called `auto` set with a `default true`, which `allows the setter functions to be used directly safely assuming the acquire and release functions will be called automatically`. 
 
 
-
 method implementation with auto definition, `auto default` is `true`:
 
 `(method) setValue(auto?: boolean): Promise<any>`
-
 
 
 method implementation with valueTransformer with auto definition, `auto default` is `true`:
@@ -22,45 +41,31 @@ method implementation with valueTransformer with auto definition, `auto default`
 `(method) setValue(valueTransformer?: (val: any) => any, auto?: boolean): Promise<any>`
 
 
-### List of implementations:
-
-- value based mutex 
-- value based with invoke function mutex
-- json single value mutex 
-- json single value with invoke function mutex
-- json nested value mutex 
-- json nested value with invoke function mutex
-- semaphore array queue 
-- semaphore array queue with invoke function mutex 
-
-
-### Usage of package
-
-```
-const mutex = require("xmutex");
-const manager = mutex.value();
-```
-
-
 ### Exports of package
 
 ```
 "json": {
-    "invokeWith": mutex.json.nestedInvokeWith,
-    "nestedInvokeWith": mutex.json.nestedInvokeWith,
-    "nonNestedInvokeWith": mutex.json.nonNestedInvokeWith,
-    "nested": mutex.json.nested,
-    "nonNested": mutex.json.nonNested
+    "invokeWith": <Function>,
+    "nestedInvokeWith": <Function>,
+    "nonNestedInvokeWith": <Function>,
+    "nested": <Function>,
+    "nonNested": <Function>
 },
 "array": {
-    "queue": mutex.array.queue,
-    "invokeWith": mutex.array.invokeWith
+    "queue": <Function>,
+    "invokeWith": <Function>
 },
-"value": mutex.value
+"value": {
+    "value": <Function>,
+    "invokeWith": <Function>
+}
 ```
 
 
-### value based mutex
+### Implementations
+
+
+### [&#10003;] value based mutex
 
 ```
 (async () => {
@@ -72,7 +77,7 @@ const manager = mutex.value();
 ```
 
 
-### value based mutex with manual acquire and release functions
+### [&#10003;] value based mutex with manual acquire and release functions
 
 if manager is the mutex function you are using like this `manager.setValue(42)` please use the same function like this `manager.setValue(42, false)` to use the acquire and release functions manually. 
 
@@ -102,7 +107,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### value based mutex with invokeWith transformer function
+### [&#10003;] value based mutex with invokeWith transformer function
 
 ```
 (async () => {
@@ -117,7 +122,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### json single level json value mutex 
+### [&#10003;] json single level json value mutex 
 
 ```
 (async () => {
@@ -132,7 +137,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### json single level json value mutex with invokeWith transformer function
+### [&#10003;] json single level json value mutex with invokeWith transformer function
 
 ```
 (async () => {
@@ -147,7 +152,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### json nested value mutex 
+### [&#10003;] json nested value mutex 
 
 ```
 (async () => {
@@ -174,7 +179,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### json nested value mutex with invokeWith transformer function
+### [&#10003;] json nested value mutex with invokeWith transformer function
 
 ```
 (async () => {
@@ -203,7 +208,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### semaphore queue or array based mutex
+### [&#10003;] semaphore queue or array based mutex
 
 ```
 (async () => {
@@ -225,7 +230,7 @@ if manager is the mutex function you are using like this `manager.setValue(42)` 
 ```
 
 
-### semaphore queue or array based mutex with invokeWith transformer function
+### [&#10003;] semaphore queue or array based mutex with invokeWith transformer function
 
 ```
 (async () => {
