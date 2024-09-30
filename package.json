@@ -1,6 +1,6 @@
 {
   "name": "xmutex",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "javascript based lockflag is a mutex like is a simple mutually exclusive flag or MuTex",
   "main": "index.js",
   "directories": {
@@ -13,13 +13,13 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ganeshkbhat/convertors.git"
+    "url": "git+https://github.com/ganeshkbhat/lockflag.git"
   },
   "bugs": {
-    "url": "https://github.com/ganeshkbhat/convertors/issues",
-    "email": "desktopcgi@gmail.com"
+    "url": "https://github.com/ganeshkbhat/lockflag/issues",
+    "email": "ganeshsurfs@gmail.com"
   },
-  "homepage": "https://github.com/ganeshkbhat/convertors#readme",
+  "homepage": "https://github.com/ganeshkbhat/lockflag#readme",
   "keywords": [
     "distributed", "lock", "flag", "critical", "flag", "sempaphore",
     "synchronized", "async", "asynchronized",
